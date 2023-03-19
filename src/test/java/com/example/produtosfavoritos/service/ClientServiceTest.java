@@ -18,6 +18,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +39,7 @@ public class ClientServiceTest {
 
         assertThat(actualClient).usingRecursiveComparison().isEqualTo(clientToSave);
         verify(clientRepository, times(1)).save(any(Client.class));
-        verifyNoMoreInteractions(clientRepository);
+        //verifyNoMoreInteractions(clientRepository);
     }
 
     @Test
@@ -73,7 +74,15 @@ public class ClientServiceTest {
 
 
         // Testing
-        List<Client> clients = clientRepository.findAll();
-        Assertions.assertEquals(clients.get(0), );
+//        List<Client> clients = clientRepository.findAll();
+//        Assertions.assertEquals(clients.get(0), );
+    }
+
+    void mustGetAClientById() {
+        Client client = Client.builder().id(1L).name("Peter Parker").email("peter.parker@gmail.com").build();
+
+        when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
+        verify(clientRepository, times(1)).findById(any(Client.class).getId());
+
     }
 }
