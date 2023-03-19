@@ -1,0 +1,37 @@
+package com.example.produtosfavoritos.service;
+
+import com.example.produtosfavoritos.model.Client;
+import com.example.produtosfavoritos.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ClientService {
+
+    @Autowired
+    private ClientRepository repo;
+
+    public Boolean emailAlreadyExists(String email) {
+
+        Client client = repo.findByEmail(email);
+
+        return client != null;
+    }
+
+//    public List<Client> getAll() {
+//        List<Client> records = repo.findAll();
+//        return records;
+//    }
+
+    public Client save(Client client) {
+
+        if (emailAlreadyExists(client.getEmail())) {
+            throw new IllegalArgumentException("This email, " + client.getEmail() + ", already exists. Choose another one");
+        }
+
+        Client record = repo.save(client);
+        return record;
+    }
+}
