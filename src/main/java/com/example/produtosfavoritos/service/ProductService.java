@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -18,15 +19,13 @@ public class ProductService {
     @Autowired
     private ProductRepository repo;
 
-    public ProductService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://challenge-api.luizalabs.com/api/product/?page=2").build();
+    public List<Product> getAll() {
+        List<Product> records = repo.findAll();
+        return records;
     }
 
-    public List<Product> getProducts() {
-        WebClient.RequestHeadersSpec<?> request = webClient.get().uri("http://challenge-api.luizalabs.com/api/product/?page=2");
-        Flux<Product> productFlux = request.retrieve().bodyToFlux(Product.class);
-        Mono<List<Product>> productListToMono = productFlux.collectList();
-        List<Product> productList = productListToMono.block();
-        return productList;
+    public Product getById(Long id) {
+        Product record = repo.findById(id).orElse(null);
+        return record;
     }
 }
