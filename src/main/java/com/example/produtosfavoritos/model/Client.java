@@ -29,7 +29,7 @@ public class Client {
     private String email;
 
     @OneToMany
-    @JoinColumn(name="product_fk")
-    private List<Product> products = new ArrayList<>();
+    @JoinColumn(name="favorites_products_fk", referencedColumnName="id")
+    private List<FavoritesProducts> favoritesProducts = new ArrayList<>();
 
 }
