@@ -14,9 +14,5 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
-    @PostMapping("/")
-    public ResponseEntity<Client> save(@RequestBody Client client) {
-        Client record = service.save(client);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
-    }
+
 }
