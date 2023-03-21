@@ -22,10 +22,10 @@ public class FavoritesProducts {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="clientId")
     private Client client;
 
-    @OneToMany(mappedBy="product")
+    @OneToMany(mappedBy="favoritesProducts")
     private List<Product> products;
 
 }

@@ -19,8 +19,8 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", nullable=false, unique=true)
-    private Long id;
+    @Column(name="clientId", nullable=false, unique=true)
+    private Long clientId;
 
     @Column(name="name", nullable=false)
     private String name;
@@ -32,6 +32,6 @@ public class Client {
     private String password;
 
     @OneToMany(mappedBy = "client")
-    private List<FavoritesProducts> favoritesProducts = new ArrayList<>();
+    private List<FavoritesProducts> favoritesProducts;
 
 }

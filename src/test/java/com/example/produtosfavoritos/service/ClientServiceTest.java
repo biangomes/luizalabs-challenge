@@ -33,7 +33,7 @@ public class ClientServiceTest {
 
     @Test
     void mustSaveOneClient() {
-        final var clientToSave = Client.builder().name("Peter Parker").email("peter.parker@gmail.com").build();
+        final var clientToSave = Client.builder().name("Peter Parker").email("peter.parker@gmail.com").password("123").build();
         when(clientRepository.save(any(Client.class))).thenReturn(clientToSave);
 
         final var actualClient = clientService.save(new Client());
@@ -56,32 +56,34 @@ public class ClientServiceTest {
         Assertions.assertTrue(result);
     }
 
-    void mustGetAllClients() {
-        // Preparing data
-        Mockito.when(clientRepository.findAll()).thenReturn(Arrays.asList(
-                new Client(1L,
-                        "Alex Raider",
-                        "alexra1der@hotmail.com", (List<FavoritesProducts>) new FavoritesProducts()),
-
-                new Client(2L,
-                        "Angelina Jolie",
-                        "jolie@outlook.com",
-                        (List<FavoritesProducts>) new FavoritesProducts())));
+//    @Test
+//    void mustGetAllClients() {
+//        // Preparing data
+//        Mockito.when(clientRepository.findAll()).thenReturn(Arrays.asList(
+//                new Client(1L,
+//                        "Alex Raider",
+//                        "alexra1der@hotmail.com", (List<FavoritesProducts>) new FavoritesProducts()),
+//
+//                new Client(2L,
+//                        "Angelina Jolie",
+//                        "jolie@outlook.com",
+//                        (List<FavoritesProducts>) new FavoritesProducts())));
 
 
         // Testing
 //        List<Client> clients = clientRepository.findAll();
 //        Assertions.assertEquals(clients.get(0), );
-    }
+//    }
 
+    @Test
     void mustGetAClientById() {
-        Client client = Client.builder().id(1L).name("Peter Parker").email("peter.parker@gmail.com").build();
+        Client client = Client.builder().clientId(1L).name("Peter Parker").email("peter.parker@gmail.com").password("123").build();
 
-        when(clientRepository.findById(client.getId())).thenReturn(Optional.of(client));
-        verify(clientRepository, times(1)).findById(any(Client.class).getId());
+        when(clientRepository.findById(client.getClientId())).thenReturn(Optional.of(client));
+        verify(clientRepository, times(1)).findById(any(Client.class).getClientId());
     }
 
-    void clientMustHaveASingleListOfFavoritesProducts() {
-
-    }
+//    void clientMustHaveASingleListOfFavoritesProducts() {
+//
+//    }
 }

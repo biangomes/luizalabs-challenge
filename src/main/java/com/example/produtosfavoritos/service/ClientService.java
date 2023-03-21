@@ -38,7 +38,7 @@ public class ClientService {
     }
 
     public Client update(Client client) {
-        Client clientToUpdate = repo.findById(client.getId()).orElse(null);
+        Client clientToUpdate = repo.findById(client.getClientId()).orElse(null);
         return repo.save(clientToUpdate);
     }
 
