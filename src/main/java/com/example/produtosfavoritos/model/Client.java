@@ -28,8 +28,7 @@ public class Client {
     @Column(name="email", unique=true, nullable=false)
     private String email;
 
-    @OneToMany
-    @JoinColumn(name="favorites_products_fk", referencedColumnName="id", unique=true)
+    @OneToMany(mappedBy = "client")
     private List<FavoritesProducts> favoritesProducts = new ArrayList<>();
 
 }
