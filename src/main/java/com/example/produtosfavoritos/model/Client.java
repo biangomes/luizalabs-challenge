@@ -1,6 +1,7 @@
 package com.example.produtosfavoritos.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Client {
     @Column(name="email", unique=true, nullable=false)
     private String email;
 
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     @Column(name="password", nullable=false)
     private String password;
 

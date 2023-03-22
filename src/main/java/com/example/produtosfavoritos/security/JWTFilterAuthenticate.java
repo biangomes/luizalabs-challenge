@@ -1,6 +1,7 @@
 package com.example.produtosfavoritos.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.example.produtosfavoritos.config.UserProfile;
 import com.example.produtosfavoritos.model.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,7 @@ public class JWTFilterAuthenticate extends UsernamePasswordAuthenticationFilter 
     // Token expires at
     public static final int TOKEN_EXPIRES = 600_000;
 
-    public static final String TOKEN_PASSWD = "";
+    public static final String TOKEN_PASSWD = "4d7210fb-a9ff-46d0-8421-c67b73e7b7ef";
 
     private final AuthenticationManager authenticationManager;
 
@@ -59,6 +60,9 @@ public class JWTFilterAuthenticate extends UsernamePasswordAuthenticationFilter 
         String token = JWT.create()
                 .withSubject(userProfile.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRES))
-                .
+                .sign(Algorithm.HMAC512(TOKEN_PASSWD));
+
+        response.getWriter().write(token);
+        response.getWriter().flush();
     }
 }

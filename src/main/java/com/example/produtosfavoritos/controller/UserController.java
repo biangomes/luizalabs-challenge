@@ -42,7 +42,7 @@ public class UserController {
 
         Client client = userRepository.findByEmail(email);
 
-        if (client.equals(null)) {
+        if (client == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
 
