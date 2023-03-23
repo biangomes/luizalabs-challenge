@@ -15,7 +15,7 @@ public class ClientService {
     private ClientRepository repo;
 
     public Boolean emailAlreadyExists(String email) {
-        Optional<Client> client = repo.findByEmail(email);
+        Client client = repo.findByEmail(email);
         return client != null;
     }
 

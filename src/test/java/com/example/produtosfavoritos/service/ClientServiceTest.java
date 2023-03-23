@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +34,12 @@ public class ClientServiceTest {
 
     @Test
     void mustSaveOneClient() {
-        final var clientToSave = Client.builder().name("Peter Parker").email("peter.parker@gmail.com").password("123").build();
+        final var clientToSave = Client.builder()
+                .name("Peter Parker")
+                .email("peter.parker@gmail.com")
+                .password("123")
+                .build();
+
         when(clientRepository.save(any(Client.class))).thenReturn(clientToSave);
 
         final var actualClient = clientService.save(new Client());
@@ -49,7 +55,7 @@ public class ClientServiceTest {
         Client client = new Client();
 
         client.setEmail(email);
-        Mockito.when(clientRepository.findByEmail(email)).thenReturn(Optional.of(Optional.of(client).orElseThrow()));
+        Mockito.when(clientRepository.findByEmail(email)).thenReturn(Optional.of(client).orElseThrow());
 
         boolean result = clientService.emailAlreadyExists(email);
 
@@ -77,7 +83,14 @@ public class ClientServiceTest {
 
     @Test
     void mustGetAClientById() {
-        Client client = Client.builder().clientId(1L).name("Peter Parker").email("peter.parker@gmail.com").password("123").build();
+        //mockStatic(UUID.class);
+        Client client = Client
+                .builder()
+                .clientId(1L)
+                .name("Peter Parker")
+                .email("peter.parker@gmail.com")
+                .password("123")
+                .build();
 
         when(clientRepository.findById(client.getClientId())).thenReturn(Optional.of(client));
         verify(clientRepository, times(1)).findById(any(Client.class).getClientId());
