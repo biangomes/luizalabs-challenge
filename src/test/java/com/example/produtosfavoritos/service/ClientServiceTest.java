@@ -49,7 +49,7 @@ public class ClientServiceTest {
         Client client = new Client();
 
         client.setEmail(email);
-        Mockito.when(clientRepository.findByEmail(email)).thenReturn(Optional.of(client).orElseThrow());
+        Mockito.when(clientRepository.findByEmail(email)).thenReturn(Optional.of(Optional.of(client).orElseThrow()));
 
         boolean result = clientService.emailAlreadyExists(email);
 

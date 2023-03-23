@@ -22,6 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Email has not been found");
         }
 
-        return new UserProfile();
+        return new UserProfile(client);
     }
 }
