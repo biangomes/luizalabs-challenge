@@ -14,8 +14,6 @@ import java.util.UUID;
 @Service
 public class ProductService {
 
-    WebClient webClient = WebClient.create();
-
     @Autowired
     private ProductRepository repo;
 
@@ -27,5 +25,18 @@ public class ProductService {
     public Product getById(Long id) {
         Product record = repo.findById(id).orElse(null);
         return record;
+    }
+
+    public Product save(Product product) {
+        Product record = repo.save(product);
+        return record;
+    }
+
+    public Product update(Product product) {
+        if (product == null) {
+            save(product);
+        } else {
+            Product productToUpdate = repo.findById(product.getId()).orElse(null);
+        }
     }
 }
