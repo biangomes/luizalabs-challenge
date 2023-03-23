@@ -32,11 +32,4 @@ public class ProductService {
         return record;
     }
 
-    public Product update(Product product) {
-        if (product == null) {
-            save(product);
-        } else {
-            Product productToUpdate = repo.findById(product.getId()).orElse(null);
-        }
-    }
 }
