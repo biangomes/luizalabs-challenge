@@ -1,0 +1,18 @@
+version: '3.5'
+services:
+  app:
+    image: favorites-products
+    ports:
+      - "80:80"
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: 'favorites_products'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:

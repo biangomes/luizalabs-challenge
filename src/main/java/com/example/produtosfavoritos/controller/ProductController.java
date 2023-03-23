@@ -29,7 +29,7 @@ public class ProductController {
         return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<Product> save(@RequestBody Product product) {
         Product record = service.save(product);
         return new ResponseEntity<>(record, HttpStatus.CREATED);

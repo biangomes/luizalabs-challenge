@@ -24,11 +24,4 @@ public class FavoriteListService {
         List<Client> records = repo.findAllByProductId(product_id);
         return records;
     }
-
-    public FavoritesProducts save(Client client, List<Product> products) {
-        FavoritesProducts favoritesProducts = new FavoritesProducts();
-
-        favoritesProducts.setClient(client);
-
-    }
 }
