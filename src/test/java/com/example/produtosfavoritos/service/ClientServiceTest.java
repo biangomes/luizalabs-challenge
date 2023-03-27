@@ -70,13 +70,19 @@ public class ClientServiceTest {
 
     @Test
     void mustUpdateAClient() {
-        Client client = Client.builder()
+        final var clientToBeSaved = Client.builder()
             .clientId(1L)
             .name("Peter Parker")
             .email("peter.parker@gmail.com")
             .password("@123")
             .build();
 
-        //when(clientRepository)
+        when(clientRepository.save(any(Client.class))).thenReturn(clientToBeSaved);
+
+        final var actualClient = clientService.save(new Client());
+
+        assertThat(actualClient).usingRecursiveComparison().isEqualTo(clientToBeSaved);
+
+        verify(clientRepository, times(1)).save(any(Client.class));
     }
 }
