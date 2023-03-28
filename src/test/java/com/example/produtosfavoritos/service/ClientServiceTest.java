@@ -64,7 +64,9 @@ public class ClientServiceTest {
                 .password("123")
                 .build();
 
-        when(clientRepository.findById(client.getClientId())).thenReturn(Optional.of(client));
+        when(clientRepository.findById(1L)).thenReturn(Optional.of(client));
+        final var actualClient = clientService.getById(1L);
+        assertThat(actualClient).usingRecursiveComparison().isEqualTo(client);
         verify(clientRepository, times(1)).findById(any(Client.class).getClientId());
     }
 
