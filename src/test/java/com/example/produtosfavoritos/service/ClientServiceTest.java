@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -58,6 +59,7 @@ public class ClientServiceTest {
 
         Client client = Client
             .builder()
+            .clientId(1L)
             .name("Peter Parker")
             .email("peter.parker@gmail.com")
             .password("@1234")
