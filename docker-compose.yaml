@@ -2,8 +2,10 @@ version: '3.5'
 services:
   app:
     image: favorites-products
+    build: ./docker/app
     ports:
-      - "80:80"
+      - "8080:8080"
+      - "9000:9000"
   database:
     image: mysql:8.0
     environment:
