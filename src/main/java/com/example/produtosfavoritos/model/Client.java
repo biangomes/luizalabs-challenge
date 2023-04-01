@@ -6,9 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Builder
 @Getter
@@ -34,7 +32,8 @@ public class Client implements Serializable {
     @Column(name="password", nullable=false)
     private String password;
 
-    @OneToMany(mappedBy = "client")
-    private List<FavoritesProducts> favoritesProducts;
-
+    
+    @OneToMany
+    @JoinColumn(name="products")
+    private List<Product> favoritesProducts;
 }

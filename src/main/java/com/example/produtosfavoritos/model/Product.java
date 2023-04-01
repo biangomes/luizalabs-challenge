@@ -31,9 +31,7 @@ public class Product {
     @Column(name="image")
     private String image;
 
-    @ManyToOne
-    @JoinColumn(name="product")
-    private FavoritesProducts favoritesProducts;
-    // TODO : reviewScore
+    @Column(name="review_score")
+    private String reviewScore;
 
 }
