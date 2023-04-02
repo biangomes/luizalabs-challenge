@@ -1,25 +1,31 @@
 package com.example.produtosfavoritos.service;
 
+import com.example.produtosfavoritos.config.ProductWebClient;
 import com.example.produtosfavoritos.model.Product;
 import com.example.produtosfavoritos.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
+import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 public class ProductService {
 
     @Autowired
+    private ProductWebClient webClient;
+
+    @Autowired
     private ProductRepository repo;
 
     public List<Product> getAll() {
-        List<Product> records = repo.findAll();
-        return records;
+        return webClient.get()
+            .uri("http://challenge-api.luizalabs.com/api/product/")
+            .retrieve()
+            .bodyToFlux(Product.class);
     }
 
     public Product getById(Long id) {
